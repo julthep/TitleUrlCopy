@@ -24,7 +24,7 @@ document.addEventListener('copy', function(e){
             var new_line_word = "\r\n";
         }
 
-        e.clipboardData.setData("text/plain", document.URL + " " + document.title);
+        e.clipboardData.setData("text/plain", decodeURIComponent(document.URL) + " " + document.title);
         e.preventDefault();
     }
 });
