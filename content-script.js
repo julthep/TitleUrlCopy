@@ -1,18 +1,18 @@
 document.addEventListener('copy', function(e){
-    // 選択している文字を取得(フォームの選択文字は取得できない)
+    // Acquire selected character (selection character of form can not be acquired)
     var select_word = window.getSelection().toString();
 
     var active_element = document.activeElement;
     var value = active_element.value;
     var form_select_word = "";
     if (value) {
-        // フォームの選択文字を取得する
+        // Retrieve form selection letter
         var start = parseInt(active_element.selectionStart, 10);
         var end = parseInt(active_element.selectionEnd, 10);
         form_select_word = value.substring(start, end);
     }
 
-    // 文字を選択していない場合
+    // When no character is selected
     if (select_word === "" && form_select_word === "") {
 
         var ua = window.navigator.userAgent.toLowerCase();
@@ -24,7 +24,7 @@ document.addEventListener('copy', function(e){
             var new_line_word = "\r\n";
         }
 
-        e.clipboardData.setData("text/plain", document.title + new_line_word + document.URL);
+        e.clipboardData.setData("text/plain", document.URL + " " + document.title);
         e.preventDefault();
     }
 });
