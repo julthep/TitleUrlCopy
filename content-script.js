@@ -24,7 +24,20 @@ document.addEventListener('copy', function(e){
             var new_line_word = "\r\n";
         }
 
-        e.clipboardData.setData("text/plain", decodeURIComponent(document.URL) + " " + document.title);
+        var docurl = "";
+        var doctitle = document.title;
+
+        try {
+            docurl = document.querySelector("link[rel='canonical']").href;
+        }
+        catch (err) {
+            docurl = document.URL;
+        }
+
+        var decurl = decodeURIComponent(docurl);
+
+        e.clipboardData.setData("text/plain", decurl + " " + doctitle);
+
         e.preventDefault();
     }
 });
