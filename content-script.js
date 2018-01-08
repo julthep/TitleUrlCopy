@@ -27,6 +27,7 @@ document.addEventListener('copy', function(e){
         // Get extension options
         var gettingItem = browser.storage.sync.get();
         gettingItem.then((res) => {
+            titlefirst = res.titlefirst;
             urlonly = res.urlonly;
             breakline = res.breakline;
             canonical = res.canonical;
@@ -35,22 +36,14 @@ document.addEventListener('copy', function(e){
 
         var docurl = document.URL;
         var doctitle = document.title;
-
         // Use Canonical URL if any
-        if (canonical) {
-            try {
-                docurl = document.querySelector("link[rel='canonical']").href;
-            }
-            catch (err) {}
-        }
-
+        if (canonical) {try {docurl = document.querySelector("link[rel='canonical']").href;} catch (err) {}}
         // Decode URL
-        if (decodeurl) {
-            docurl = decodeURIComponent(docurl);
-        }
-
+        if (decodeurl) {docurl = decodeURIComponent(docurl);}
+        // Swap URL and Title
+        if (titlefirst) {[docurl, doctitle] = [doctitle, docurl];}
+        // Put to Clipboard
         e.clipboardData.setData("text/plain", docurl + (urlonly ? "" : (breakline ? new_line_word : " ") + doctitle));
-
         e.preventDefault();
     }
 });

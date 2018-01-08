@@ -1,32 +1,26 @@
 {
-
     "description": "When you press command+c(mac) or ctrl+c(win) with no character selected, save the page URL and title on the clipboard.",
     "manifest_version": 2,
     "name": "UrlTitleCopy",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "homepage_url": "https://github.com/julthep/UrlTitleCopy",
     "icons": {
         "60": "icons/url_title_copy_60.png"
     },
-
     "content_scripts": [
         {
             "matches": [ "<all_urls>" ],
             "js": [ "content-script.js" ]
         }
     ],
-
     "options_ui": {
-        "page": "options.html",
-        "browser_style": true
+        "page": "options.html"
     },
     "permissions": [ "storage" ],
-
     "applications": {
         "gecko": {
             "id": "urltitlecopy@cba.net",
             "strict_min_version": "57.0a1"
         }
     }
-
 }
