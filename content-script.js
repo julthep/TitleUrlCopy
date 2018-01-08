@@ -24,19 +24,32 @@ document.addEventListener('copy', function(e){
             var new_line_word = "\r\n";
         }
 
-        var docurl = "";
+        // Get extension options
+        var gettingItem = browser.storage.sync.get();
+        gettingItem.then((res) => {
+            urlonly = res.urlonly;
+            breakline = res.breakline;
+            canonical = res.canonical;
+            decodeurl = res.decodeurl;
+        });
+
+        var docurl = document.URL;
         var doctitle = document.title;
 
-        try {
-            docurl = document.querySelector("link[rel='canonical']").href;
-        }
-        catch (err) {
-            docurl = document.URL;
+        // Use Canonical URL if any
+        if (canonical) {
+            try {
+                docurl = document.querySelector("link[rel='canonical']").href;
+            }
+            catch (err) {}
         }
 
-        var decurl = decodeURIComponent(docurl);
+        // Decode URL
+        if (decodeurl) {
+            docurl = decodeURIComponent(docurl);
+        }
 
-        e.clipboardData.setData("text/plain", decurl + " " + doctitle);
+        e.clipboardData.setData("text/plain", docurl + (urlonly ? "" : (breakline ? new_line_word : " ") + doctitle));
 
         e.preventDefault();
     }
