@@ -27,10 +27,22 @@ When you paste saved on clipboard, it is displayed in the following format.
    * _Check_ - Separate them with new line
    * _Uncheck_ - Separate them with space
 
-4. **Use Canonical URL if any**
+4. **Clean URL query string**
+   * _Check_ - Clean URL query string to include only selected parameters: (Google search) q, tbm (YouTube video) v
+   * _Uncheck_ - Do not clean URL query string
+
+5. **Use Canonical URL if any**
    * _Check_ - Use Canonical URL if any
    * _Uncheck_ - Do not use Canonical URL
 
-5. **Decode URL**
+6. **Decode URL**
    * _Check_ - Decode URL
    * _Uncheck_ - Do not decode URL
+
+# Revision History
+
+* **v1.1.7** _2017/01/11_ Add Clean URL query string option.
+* **v1.1.6** _2017/01/09_ Add Swap URL and Title option.
+* **v1.1.5** _2017/01/08_ Add Options Page with URL only option and line break option.
+* **v1.1.4** _2017/01/07_ Add Canonical URL feature.
+* **v1.1.3** _2017/01/07_ First fork from original TitleUrlCopy v1.1.2. Swap Title and URL, rename to UrlTitleCopy. Add Decode URL feature.

@@ -2,7 +2,7 @@
     "description": "When you press command+c(mac) or ctrl+c(win) with no character selected, save the page URL and title on the clipboard.",
     "manifest_version": 2,
     "name": "UrlTitleCopy",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "homepage_url": "https://github.com/julthep/UrlTitleCopy",
     "icons": {
         "60": "icons/url_title_copy_60.png"
