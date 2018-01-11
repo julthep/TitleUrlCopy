@@ -25,29 +25,30 @@ document.addEventListener('copy', function(e){
         }
 
         // Default options
-        //var titlefirst = false;
-        //var urlonly = false;
-        //var breakline = false;
-        //var cleanurl = true;
-        //var canonical = true;
-        //var decodeurl = true;
+        var titlefirst = false;
+        var urlonly = false;
+        var breakline = false;
+        var cleanurl = true;
+        var canonical = true;
+        var decodeurl = true;
 
-        // Get extension options
-        var gettingItem = browser.storage.sync.get();
-        gettingItem.then((res) => {
-            titlefirst = res.titlefirst;
-            urlonly = res.urlonly;
-            breakline = res.breakline;
-            cleanurl = res.cleanurl;
-            canonical = res.canonical;
-            decodeurl = res.decodeurl;
-        });
+        //// Get extension options
+        //var gettingItem = browser.storage.sync.get();
+        //gettingItem.then((res) => {
+        //    titlefirst = res.titlefirst;
+        //    urlonly = res.urlonly;
+        //    breakline = res.breakline;
+        //    cleanurl = res.cleanurl;
+        //    canonical = res.canonical;
+        //    decodeurl = res.decodeurl;
+        //});
 
         var docurl = document.URL;
         var doctitle = document.title;
 
         // Clean URL query string to include only selected parameters: (Google search) q, tbm (YouTube video) v 
-        if (cleanurl) { docurl = docurl.split("?")[0] + "?" + docurl.match(/(q|tbm|v)=[^&]+/g).join('&'); }
+        //if (cleanurl) { try { docurl = docurl.split("?")[0] + "?" + docurl.match(/(q|tbm|v)=[^&]+/g).join('&'); } catch (err) { } }
+        if (cleanurl) { try { docurl = docurl.split("?")[0] + "?" + docurl.match(/(&q|\?q|&tbm|\?tbm|&v|\?v)=[^&]+/g).map(el => el.slice(1)).join('&'); } catch (err) { } }
         // Use Canonical URL if any
         if (canonical) { try { docurl = document.querySelector("link[rel='canonical']").href; } catch (err) { } }
         // Decode URL
