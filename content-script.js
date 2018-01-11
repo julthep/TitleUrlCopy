@@ -24,7 +24,7 @@ document.addEventListener('copy', function(e){
             var new_line_word = "\r\n";
         }
 
-        // Default options
+        //// Default options
         //var titlefirst = false;
         //var urlonly = false;
         //var breakline = false;
@@ -47,7 +47,8 @@ document.addEventListener('copy', function(e){
         var doctitle = document.title;
 
         // Clean URL query string to include only selected parameters: (Google search) q, tbm (YouTube video) v 
-        if (cleanurl) { docurl = docurl.split("?")[0] + "?" + docurl.match(/(q|tbm|v)=[^&]+/g).join('&'); }
+        //if (cleanurl) { try { docurl = docurl.split("?")[0] + "?" + docurl.match(/(q|tbm|v)=[^&]+/g).join('&'); } catch (err) { } }
+        if (cleanurl) { try { docurl = docurl.split("?")[0] + "?" + docurl.match(/(&q|\?q|&tbm|\?tbm|&v|\?v)=[^&]+/g).map(el => el.slice(1)).join('&'); } catch (err) { } }
         // Use Canonical URL if any
         if (canonical) { try { docurl = document.querySelector("link[rel='canonical']").href; } catch (err) { } }
         // Decode URL
